@@ -10,5 +10,12 @@
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
+<style>
+    [x-cloak] {
+        display: none
+    }
+</style>
+<!-- Include the Alpine library on your page -->
+<script src="https://unpkg.com/alpinejs" defer></script>
 @vite(['resources/css/app.css', 'resources/js/app.js'])
 @fluxAppearance
