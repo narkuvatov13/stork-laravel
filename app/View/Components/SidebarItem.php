@@ -8,18 +8,23 @@ use Illuminate\View\Component;
 
 class SidebarItem extends Component
 {
+
+    public string $route;
+
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct(string $route)
     {
         //
+
+        $this->route = $route;
     }
 
     /**
      * Get the view / contents that represent the component.
      */
-    public function render(): View|Closure|string
+    public function render()
     {
         return view('components.sidebar-item');
     }

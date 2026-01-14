@@ -14,14 +14,23 @@ Route::fallback(function () {
 Route::middleware(['auth', 'verified'])->group(function () {
 
     // Dashboard
-    Route::get('/dashboard', function () {
+    Route::get('dashboard', function () {
         return view('dashboard');
     })->name('dashboard');
 
     // Catagories
-    Route::prefix('/category')->group(function () {
-        Route::get('/lists', [CategoryController::class, 'index'])->name('category-lists');
-    });
+    // Route::prefix('/categories')->name('categories.')->group(function () {
+    //     Route::get('/list', [CategoryController::class, 'index'])->name('index');
+    // });
+    //     | URL                  | Route name          |
+    // | -------------------- | ------------------- |
+    // | GET /categories      | `categories.index`  |
+    // | POST /categories     | `categories.store`  |
+    // | GET /categories/{id} | `categories.show`   |
+    // | PUT /categories/{id} | `categories.update` |
+
+
+    Route::resource('categories', CategoryController::class);
 });
 
 require __DIR__ . '/settings.php';

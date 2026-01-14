@@ -15,22 +15,19 @@
         </flux:sidebar.header>
 
         {{-- Sidebar Nav Items --}}
-        <x-sidebar-item>Dashborad</x-sidebar-item>
+        <x-sidebar-item route='dashboard'>Dashborad</x-sidebar-item>
+
         <x-accordion title='Category' class="text-base">
-            <x-accordion-item>Category Lists</x-accordion-item>
-            <x-accordion-item>Category Create</x-accordion-item>
-            <x-accordion-item>Category Update</x-accordion-item>
+            <x-accordion-item route='categories.index'>Product Lists </x-accordion-item>
+
         </x-accordion>
 
-        <x-accordion title='Product' class="text-base">
-            <x-accordion-item>Product Lists</x-accordion-item>
-            <x-accordion-item>Product Create</x-accordion-item>
-            <x-accordion-item>Product Update</x-accordion-item>
-        </x-accordion>
+
 
         {{-- Sidebar Bottom --}}
         <flux:spacer />
-        <x-desktop-user-menu class="hidden lg:block" :name="auth()->user()->name" />
+        <x-desktop-user-menu class="hidden
+                lg:block" :name="auth()->user()->name" />
     </flux:sidebar>
 
 
