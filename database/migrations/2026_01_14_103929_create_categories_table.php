@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
+            $table->string('name')->unique();
             $table->string('slug')->unique();
             $table->softDeletes();
             $table->timestamps();

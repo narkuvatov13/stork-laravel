@@ -63,6 +63,13 @@ class User extends Authenticatable
         ];
     }
 
+    // Relationships
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+
     // UUID Primary Key Support
     protected static function booted()
     {

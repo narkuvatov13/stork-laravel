@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CategoryRequest;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -25,10 +29,20 @@ class CategoryController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CategoryRequest $request)
     {
-        //
-        dd(PHP_VERSION);
+        // dd($request->slug);
+        $request->validated();
+        Auth::user()->categories()->create([
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
+        ]);
+
+        // dd($test);
+        return redirect()->route('dashboard');
+
+
+        // $request->validated();
     }
 
     /**
