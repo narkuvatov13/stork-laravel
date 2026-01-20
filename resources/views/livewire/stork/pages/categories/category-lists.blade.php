@@ -13,7 +13,9 @@
 
 
             <div class="w-1/2">
-                <flux:button class="w-full" variant="primary" color="green" type="submit">Create</flux:button>
+                <flux:button class="w-full" variant="primary" color="green" type="submit">Create
+                    {{ \App\Enums\Status::INACTIVE }}
+                </flux:button>
             </div>
         </div>
     </form>

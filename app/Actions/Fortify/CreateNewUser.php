@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 use Laravel\Fortify\Contracts\CreatesNewUsers;
+use App\Enums\UserRole;
+use App\Enums\Status;
 
 class CreateNewUser implements CreatesNewUsers
 {
@@ -34,6 +36,8 @@ class CreateNewUser implements CreatesNewUsers
             'name' => $input['name'],
             'email' => $input['email'],
             'password' => $input['password'],
+            'role' => UserRole::CUSTOMER,
+            'status' => Status::ACTIVE,
         ]);
     }
 }
