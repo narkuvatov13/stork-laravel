@@ -8,8 +8,5 @@ use App\Enums\Status;
 
 class Category extends Model
 {
-    //
-    protected $casts = [
-        'status' => Status::class,
-    ];
+
 }

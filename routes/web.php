@@ -2,15 +2,24 @@
 
 use App\Http\Controllers\CategoryController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
-Route::get('/', function () {
+Route::get('welcome', function () {
     return view('welcome');
 })->name('home');
 
 
+Route::get('/', function () {
+    if (Auth::check()) {
+        return redirect()->route('dashboard');
+    }
+    return redirect()->route('login');
+})->name('login');
+
 Route::fallback(function () {
     return view('livewire.stork.pages.not-founded.not-founded');
 });
+
 Route::middleware(['auth', 'verified'])->group(function () {
 
     // Dashboard
