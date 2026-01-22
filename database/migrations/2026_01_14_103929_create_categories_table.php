@@ -18,6 +18,7 @@ return new class extends Migration
             $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
             $table->string('name')->unique();
             $table->string('slug')->unique();
+            $table->string('image');
             $table->boolean('is_active')->default(true);
             $table->foreignId('parent_id')->nullable()->constrained('categories')->nullOnDelete();
             $table->softDeletes();

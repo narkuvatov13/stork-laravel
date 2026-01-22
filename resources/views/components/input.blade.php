@@ -2,7 +2,7 @@
 <div>
     <div>
         @isset($id)
-            <label for="{{ $id }}" class="font-normal"> {{ $label }}</label>
+            <label for="{{ $id }}" class="font-medium"> {{ $label }}</label>
         @endisset
         <input id={{ $id ?? '' }} {{ $attributes }}
             class=" w-full h-10 my-0.5 px-3   py-2 text-sm text-black font-normal bg-white border rounded-md border-neutral-300 ring-offset-background placeholder:text-neutral-500 focus:border-neutral-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400 disabled:cursor-not-allowed disabled:opacity-50" />

@@ -33,11 +33,16 @@ class CategoryController extends Controller
      */
     public function store(CategoryRequest $request)
     {
-        // dd($request->slug);
+        // dd($request->image);
+
         $request->validated();
+        $imagePath = $request->file('image')->store('categories', 'public');
+
         Auth::user()->categories()->create([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
+            'image' => $imagePath,
+            'is_active' => true,
         ]);
 
         // dd($test);
