@@ -18,8 +18,8 @@
         <x-sidebar-item route='dashboard'>Dashborad</x-sidebar-item>
 
         <x-accordion title='Category' class="text-base">
-            <x-accordion-item route='categories.index'>Product Lists </x-accordion-item>
-
+            <x-accordion-item route='categories.index'>Category Lists </x-accordion-item>
+            <x-accordion-item route='categories.create'>Category Create </x-accordion-item>
         </x-accordion>
 
 

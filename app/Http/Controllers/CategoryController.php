@@ -15,7 +15,9 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('livewire.stork.pages.categories.category-lists');
+
+        $categories = Category::all();
+        return view('livewire.stork.pages.categories.category-lists', compact('categories'));
     }
 
     /**
@@ -23,7 +25,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
+        return view('livewire.stork.pages.categories.category-create');
     }
 
     /**

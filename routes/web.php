@@ -37,9 +37,13 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     // | POST /categories     | `categories.store`  |
     // | GET /categories/{id} | `categories.show`   |
     // | PUT /categories/{id} | `categories.update` |
-
-
     Route::resource('categories', CategoryController::class);
+
+
+
+
+
+    
 });
 
 require __DIR__ . '/settings.php';
