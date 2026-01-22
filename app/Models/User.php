@@ -32,8 +32,10 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
-        'role',
-        'status',
+        'profile_photo',
+        'phone',
+        'is_active',
+        'deleted_at',
     ];
 
     /**
@@ -67,6 +69,28 @@ class User extends Authenticatable
     public function categories()
     {
         return $this->hasMany(Category::class);
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+    public function hasRole($role)
+    {
+        return $this->roles()->where('slug', $role)->exists();
+    }
+
+    public function hasPermission($permission)
+    {
+        return $this->roles()
+            ->whereHas('permissions', function ($q) use ($permission) {
+                $q->where('slug', $permission);
+            })->exists();
     }
 
 

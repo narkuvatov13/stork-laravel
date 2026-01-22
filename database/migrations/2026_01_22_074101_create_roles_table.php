@@ -1,7 +1,5 @@
 <?php
 
-use App\Enums\Status;
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('roles', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
-            $table->string('name')->unique();
+            $table->string('name')->default('customer')->unique();
             $table->string('slug')->unique();
-            $table->boolean('is_active')->default(true);
-            $table->foreignId('parent_id')->nullable()->constrained('categories')->nullOnDelete();
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -30,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('roles');
     }
 };

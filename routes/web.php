@@ -20,7 +20,7 @@ Route::fallback(function () {
     return view('livewire.stork.pages.not-founded.not-founded');
 });
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
 
     // Dashboard
     Route::get('dashboard', function () {
