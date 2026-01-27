@@ -5,8 +5,7 @@ use Illuminate\Container\Attributes\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
 
-new class extends Component
-{
+new class extends Component {
     use WithPagination;
 
 
@@ -15,12 +14,10 @@ new class extends Component
         return $this->view()
             ->layout('layouts::app');
     }
-    //    return $this->redirect('dashboard');
 
     //Variables
 
     // public string $search = '';
-
 
     // public function with(): array
     // {
@@ -31,14 +28,12 @@ new class extends Component
     //         $query->where('name', 'like', '%', $this->search, '%');
     //     }
 
-
     //     // Filter By Is Active
 
     //     return [
     //         'categories' => $query->paginate(5)
     //     ];
     // }
-
 
     // public function updatingSearch(): void
     // {

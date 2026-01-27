@@ -28,12 +28,19 @@ Route::middleware(['auth', 'verified'])->group(function () {
     })->name('dashboard');
 
     // Categories
-    Route::livewire('/categories', 'pages::categories.index')->name('categories.test');
+    Route::livewire('/categories', 'pages::categories.index')->name('categories.index');
 
-    // Route::livewire('/categories/create', 'pages::categories.create')->middleware('can:create categories')->name('categories.create');
+    Route::livewire('/categories/create', 'pages::categories.create')->middleware('can:create categories')->name('categories.create');
 
-    // Route::livewire('/categories/{category}/edit', 'pages::categories.edit')->name('categories.edit');
+    Route::livewire('/categories/{category}/edit', 'pages::categories.edit')->name('categories.edit');
 
+    // Users
+
+    Route::livewire('/categories', 'pages::users.index')->name('users.index');
+
+    Route::livewire('/categories/create', 'pages::users.create')->middleware('can:create categories')->name('users.create');
+
+    Route::livewire('/categories/{category}/edit', 'pages::users.edit')->name('users.edit');
 
     // Catagories
     // Route::prefix('/categories')->name('categories.')->group(function () {
