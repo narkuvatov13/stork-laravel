@@ -35,12 +35,11 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::livewire('/categories/{category}/edit', 'pages::categories.edit')->name('categories.edit');
 
     // Users
+    Route::livewire('/users', 'pages::users.index')->name('users.index');
 
-    Route::livewire('/categories', 'pages::users.index')->name('users.index');
+    Route::livewire('/users/create', 'pages::users.create')->middleware('can:create users')->name('users.create');
 
-    Route::livewire('/categories/create', 'pages::users.create')->middleware('can:create categories')->name('users.create');
-
-    Route::livewire('/categories/{category}/edit', 'pages::users.edit')->name('users.edit');
+    Route::livewire('/users/{user}/edit', 'pages::users.edit')->name('users.edit');
 
     // Catagories
     // Route::prefix('/categories')->name('categories.')->group(function () {

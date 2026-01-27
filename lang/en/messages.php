@@ -8,5 +8,5 @@ return [
     'category_list' => 'Category List',
     'dashboard' => 'Dashboard',
     'users' => 'Users',
-
+    'new_category' => 'New Category',
 ];

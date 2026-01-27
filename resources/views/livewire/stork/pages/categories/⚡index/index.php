@@ -17,33 +17,33 @@ new class extends Component {
 
     //Variables
 
-    // public string $search = '';
+    public string $search = '';
 
-    // public function with(): array
-    // {
-    //     $query = Category::with('user')->latest();
+    public function with(): array
+    {
+        $query = Category::with('user')->latest();
 
-    //     // Filter By Search
-    //     if ($this->search) {
-    //         $query->where('name', 'like', '%', $this->search, '%');
-    //     }
+        // Filter By Search
+        if ($this->search) {
+            $query->where('name', 'like', '%', $this->search, '%');
+        }
 
-    //     // Filter By Is Active
+        // Filter By Is Active
 
-    //     return [
-    //         'categories' => $query->paginate(5)
-    //     ];
-    // }
+        return [
+            'categories' => $query->paginate(5)
+        ];
+    }
 
-    // public function updatingSearch(): void
-    // {
-    //     $this->resetPage();
-    // }
+    public function updatingSearch(): void
+    {
+        $this->resetPage();
+    }
 
-    // public function deleteCategory(Category $category): void
-    // {
-    //     // authorize
-    //     $category->delete();
-    //     session()->flash('success', 'Category deleted successfully');
-    // }
+    public function deleteCategory(Category $category): void
+    {
+        // authorize
+        $category->delete();
+        session()->flash('success', 'Category deleted successfully');
+    }
 };

@@ -20,14 +20,14 @@
             <flux:sidebar.item :href="route('dashboard')" icon="home" wire:navigate>
                 {{ __('messages.dashboard') }}
             </flux:sidebar.item>
-            @can('view users')
+            @can('view categories')
                 <flux:sidebar.item :href="route('categories.index')" icon="squares-plus" wire:navigate>
-                    {{ __('messages.users') }}
+                    {{ __('messages.categories') }}
                 </flux:sidebar.item>
             @endcan
-            @can('view categories')
-                <flux:sidebar.item :href="route('categories.index')" icon="user-group" wire:navigate>
-                    {{ __('messages.categories') }}
+            @can('view users')
+                <flux:sidebar.item :href="route('users.index')" icon="user-group" wire:navigate>
+                    {{ __('messages.users') }}
                 </flux:sidebar.item>
             @endcan
 
