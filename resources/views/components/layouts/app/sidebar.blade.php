@@ -15,14 +15,28 @@
         </flux:sidebar.header>
 
         {{-- Sidebar Nav Items --}}
-        <x-sidebar-item route='dashboard'>Dashborad</x-sidebar-item>
 
-        <x-accordion title='Category' class="text-base">
-            <x-accordion-item route='categories.index'>Category Lists </x-accordion-item>
-            <x-accordion-item route='categories.create'>Category Create </x-accordion-item>
-        </x-accordion>
+        <flux:sidebar.nav>
+            <flux:sidebar.item :href="route('dashboard')" icon="home" wire:navigate>
+                {{ __('Dashboard') }}
+            </flux:sidebar.item>
+            <flux:sidebar.item :href="route('categories.index')" icon="home" wire:navigate>
+                {{ __('Categories') }}
+            </flux:sidebar.item>
+            <flux:sidebar.item :href="route('categories.create')" icon="home" wire:navigate>
+                {{ __('Users') }}
+            </flux:sidebar.item>
+        </flux:sidebar.nav>
 
 
+
+
+        {{-- Sidebar Collapse --}}
+        {{-- <flux:sidebar.group expandable heading="Favorites" class="grid">
+            <flux:sidebar.item href="#">Marketing site</flux:sidebar.item>
+            <flux:sidebar.item href="#">Android app</flux:sidebar.item>
+            <flux:sidebar.item href="#">Brand guidelines</flux:sidebar.item>
+        </flux:sidebar.group> --}}
 
         {{-- Sidebar Bottom --}}
         <flux:spacer />

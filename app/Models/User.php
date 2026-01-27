@@ -11,13 +11,14 @@ use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
-use App\Enums\UserRole;
 use App\Enums\Status;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Spatie\Permission\Traits\HasRoles;
 
 class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable, TwoFactorAuthenticatable, HasApiTokens, HasUuids;
+    use HasFactory, Notifiable, TwoFactorAuthenticatable, HasApiTokens, HasUuids, HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -60,38 +61,21 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
-            'role' => UserRole::class,
             'status' => Status::class,
         ];
     }
 
     // Relationships
-    public function categories()
+    public function categories(): HasMany
     {
         return $this->hasMany(Category::class);
     }
 
-    public function products()
+    public function products(): HasMany
     {
         return $this->hasMany(Product::class);
     }
 
-    public function roles()
-    {
-        return $this->belongsToMany(Role::class);
-    }
-    public function hasRole($role)
-    {
-        return $this->roles()->where('slug', $role)->exists();
-    }
-
-    public function hasPermission($permission)
-    {
-        return $this->roles()
-            ->whereHas('permissions', function ($q) use ($permission) {
-                $q->where('slug', $permission);
-            })->exists();
-    }
 
 
     // UUID Primary Key Support

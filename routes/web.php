@@ -20,7 +20,7 @@ Route::fallback(function () {
     return view('livewire.stork.pages.not-founded.not-founded');
 });
 
-Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     // Dashboard
     Route::get('dashboard', function () {
@@ -38,12 +38,6 @@ Route::middleware(['auth', 'verified', 'role:admin'])->group(function () {
     // | GET /categories/{id} | `categories.show`   |
     // | PUT /categories/{id} | `categories.update` |
     Route::resource('categories', CategoryController::class);
-
-
-
-
-
-    
 });
 
 require __DIR__ . '/settings.php';
