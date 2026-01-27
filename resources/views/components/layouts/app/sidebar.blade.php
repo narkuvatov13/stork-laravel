@@ -17,15 +17,17 @@
         {{-- Sidebar Nav Items --}}
 
         <flux:sidebar.nav>
-            <flux:sidebar.item :href="route('dashboard')" icon="home" wire:navigate>
-                {{ __('Dashboard') }}
+            <flux:sidebar.item :href="route('dashboard')" icon="home" :current="request()->routeIs('dashboard')"
+                wire:navigate>
+                {{ __('messages.dashboard') }}
             </flux:sidebar.item>
-            <flux:sidebar.item :href="route('categories.index')" icon="home" wire:navigate>
-                {{ __('Categories') }}
+            {{-- @can('view categories') --}}
+            <flux:sidebar.item :href="route('categories.test')" icon="home" wire:navigate>
+                {{ __('messages.users') }}
             </flux:sidebar.item>
-            <flux:sidebar.item :href="route('categories.create')" icon="home" wire:navigate>
-                {{ __('Users') }}
-            </flux:sidebar.item>
+            {{-- @endcan --}}
+
+
         </flux:sidebar.nav>
 
 

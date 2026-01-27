@@ -27,6 +27,14 @@ Route::middleware(['auth', 'verified'])->group(function () {
         return view('dashboard');
     })->name('dashboard');
 
+    // Categories
+    Route::livewire('/categories', 'pages::categories.index')->name('categories.test');
+
+    // Route::livewire('/categories/create', 'pages::categories.create')->middleware('can:create categories')->name('categories.create');
+
+    // Route::livewire('/categories/{category}/edit', 'pages::categories.edit')->name('categories.edit');
+
+
     // Catagories
     // Route::prefix('/categories')->name('categories.')->group(function () {
     //     Route::get('/list', [CategoryController::class, 'index'])->name('index');
@@ -37,7 +45,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
     // | POST /categories     | `categories.store`  |
     // | GET /categories/{id} | `categories.show`   |
     // | PUT /categories/{id} | `categories.update` |
-    Route::resource('categories', CategoryController::class);
+    // Route::resource('categories', CategoryController::class);
+
+
 });
 
 require __DIR__ . '/settings.php';
