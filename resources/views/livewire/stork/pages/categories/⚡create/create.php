@@ -24,10 +24,10 @@ new class extends Component {
     public  $is_active = '1';
 
     // Render
-    public function render()
-    {
-        return $this->view()->layout('layouts::app');
-    }
+    // public function render()
+    // {
+    //     return $this->view()->layout('layouts::app');
+    // }
 
 
 

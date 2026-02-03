@@ -1,8 +1,8 @@
 <div>
     {{-- Categories Heading --}}
     <div class="mb-6">
-        <h1 class="text-2xl font-bold dark:text-slate-100 text-zinc-900"> Categories</h1>
-        <p class="mt-1 text-sm dark:text-slate-400 text-zinc-600">Manage your categories</p>
+        <h1 class="text-2xl font-bold dark:text-slate-100 text-zinc-900"> Category Create</h1>
+        {{-- <p class="mt-1 text-sm dark:text-slate-400 text-zinc-600">Manage your categories</p> --}}
     </div>
 
     {{-- Category Form --}}
@@ -60,12 +60,11 @@
                         </div>
                     </label>
                 </div>
-                {{-- value='{{ $is_active ? \App\Enums\Status\Status::INACTIVE : \App\Enums\Status\Status::ACTIVE }}' --}}
 
 
 
 
-                @error('status')
+                @error('is_active')
                     <p class='mt-1 text-sm text-red-600'>{{ $message }}</p>
                 @enderror
             </div>

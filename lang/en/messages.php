@@ -9,4 +9,6 @@ return [
     'dashboard' => 'Dashboard',
     'users' => 'Users',
     'new_category' => 'New Category',
+    'create' => 'Create',
+    'x'     => 'X',
 ];

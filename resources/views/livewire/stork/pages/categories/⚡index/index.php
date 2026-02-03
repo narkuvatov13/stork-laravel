@@ -2,6 +2,7 @@
 
 use App\Models\Category;
 use Illuminate\Container\Attributes\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -9,11 +10,11 @@ new class extends Component {
     use WithPagination;
 
 
-    public function render()
-    {
-        return $this->view()
-            ->layout('layouts::app');
-    }
+    // public function render()
+    // {
+    //     return $this->view()
+    //         ->layout('layouts::app');
+    // }
 
     //Variables
 
@@ -21,17 +22,15 @@ new class extends Component {
 
     public function with(): array
     {
-        $query = Category::with('user')->latest();
-
-        // Filter By Search
-        if ($this->search) {
-            $query->where('name', 'like', '%', $this->search, '%');
-        }
-
-        // Filter By Is Active
-
         return [
-            'categories' => $query->paginate(5)
+            'categories' => Category::with('user')
+                ->latest()
+                ->when(
+                    $this->search,
+                    fn($q) =>
+                    $q->where('name', 'like', '%' . $this->search . '%')
+                )
+                ->paginate(5),
         ];
     }
 
@@ -40,6 +39,7 @@ new class extends Component {
         $this->resetPage();
     }
 
+    #[On('delete')]
     public function deleteCategory(Category $category): void
     {
         // authorize

@@ -2,6 +2,7 @@
 
 use App\Models\Category;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 use Livewire\Component;
 
 use Livewire\WithFileUploads;
@@ -20,52 +21,54 @@ new class extends Component
     #[Validate('required|string|min:3|max:255')]
     public string $slug = '';
 
-    #[Validate('required|image|max:2048')]
+    #[Validate('image|nullable')]
     public $image;
 
 
-    #[Validate('required|image|max:2048')]
+    #[Validate('required|boolean')]
     public bool $is_active;
 
 
 
     public string $existing_image = '';
 
-    public function render()
-    {
-        return $this->view()->layout('layouts::app');
-    }
+    // public function render()
+    // {
+    //     return $this->view()->layout('layouts::app');
+    // }
 
     public function mount(Category $category): void
     {
         $this->category = $category;
         $this->name = $category->name;
         $this->slug = $category->slug;
+        $this->is_active = $category->is_active;
         $this->existing_image = $category->image ?? '';
     }
 
     public function update(): void
     {
         $this->validate();
+
         $this->category->name = $this->name;
-        $this->category->slug = $this->slug;
+        $this->category->slug = Str::slug($this->name);
 
 
-        if ($this->image)
+        if ($this->image) {
             // Delete old image if existing
             if ($this->existing_image) {
                 Storage::disk('public')->delete($this->existing_image);
             }
 
-        $path = $this->image->store('categories', 'public');
+            $path = $this->image->store('categories', 'public');
+            $this->category->image = $path;
+            $this->existing_image = $path;
+        }
+        $this->category->is_active = $this->is_active;
 
-        $this->category->image = $path;
-        $this->existing_image = $path;
-
-
-        $this->category->save();
+        $this->category->update();
 
         session()->flash('success', 'Category Update Successfully!');
-        $this->refirect(route('categories.index'), navigate: true);
+        $this->redirect(route('categories.index'));
     }
 };

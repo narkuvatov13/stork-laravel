@@ -12,15 +12,21 @@ class Category extends Model
 {
     protected $fillable = [
         'user_id',
+        'parent_id',
         'name',
         'slug',
         'image',
         'is_active',
-        'parent_id',
+        'order',
         'deleted_at',
 
     ];
 
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
 
     public function parent(): BelongsTo
@@ -38,11 +44,13 @@ class Category extends Model
         return $this->hasMany(Product::class);
     }
 
-    public function user(): BelongsTo
-    {
-        return $this->belongsTo(User::class);
-    }
 
+    /**
+İçecekler (id=1)
+ └── Gazlı İçecekler (parent_id=1)
+      └── Cola (parent_id=2)
+
+     */
 
     // Create Slug
     protected static function boot()

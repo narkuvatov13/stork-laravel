@@ -40,7 +40,7 @@ return [
         // 'pages' => resource_path('views/pages'),
         'pages' => resource_path('views/livewire/stork/pages'),
         'livewire' => resource_path('views/livewire'),
-        'stork' => resource_path('views/livewire/stork'),
+        // 'stork' => resource_path('views/livewire/stork'),
 
 
     ],

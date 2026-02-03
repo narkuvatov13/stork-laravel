@@ -1,28 +1,31 @@
 <?php
 
-use App\Enums\Status;
-
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration
 {
+    /*
+    cities
+ └── districts
+      └── warehouses
+           └── stocks
+                └── products
+
+     */
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('warehouses', function (Blueprint $table) {
             $table->id();
-            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('parent_id')->nullable()->constrained('categories')->nullOnDelete();
+            $table->foreignId('city_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('district_id')->constrained()->cascadeOnDelete();
             $table->string('name');
-            $table->string('slug')->unique();
-            $table->string('image');
+            $table->string('slug')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->integer('order')->default(0);
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -32,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('warehouses');
     }
 };

@@ -11,17 +11,8 @@ class Product extends Model
         'name',
         'slug',
         'description',
-        'price',
-        'discounted_price',
-        'unit',
-        'weight',
-        'image',
-        'stock',
-        'min_stock',
-        'barcode',
-        'brand',
         'is_active',
-        
+
 
     ];
 
@@ -30,8 +21,12 @@ class Product extends Model
         return $this->belongsTo(Category::class);
     }
 
-    public function tags()
+    public function variants()
     {
-        return $this->belongsToMany(Tag::class);
+        return $this->hasMany(ProductVariant::class);
+    }
+    public function stocks()
+    {
+        return $this->hasMany(Stock::class);
     }
 }

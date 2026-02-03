@@ -17,17 +17,8 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->nullable()->unique();
             $table->text('description')->nullable();
-            $table->decimal('price', 10, 2);
-            $table->decimal('discounted_price', 10, 2)->nullable();
-            $table->string('unit')->nullable();
-            $table->decimal('weight', 10, 2)->nullable();
             $table->string('image')->nullable();
-            $table->integer('stock')->nullable()->default(0);
-            $table->integer('min_stock')->nullable()->default(0);
-            $table->string('barcode')->nullable()->unique();
-            $table->string('brand')->nullable();
-            $table->boolean('is_active')->default(true);
-            // $table->string('sku')->nullable()->unique();
+
             $table->timestamps();
         });
     }
