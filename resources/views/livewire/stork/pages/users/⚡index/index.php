@@ -2,9 +2,11 @@
 
 use Livewire\Component;
 use App\Models\User;
+use Livewire\WithPagination;
 
 new class extends Component
 {
+    use WithPagination;
     //
 
 
@@ -13,17 +15,13 @@ new class extends Component
     //     return $this->view()->layout('layouts::app', ['users' => $this->users]);
     // }
 
-    public $users;
-
-    public function mount(): void
-    {
-        $this->users = User::all();
-    }
+    public string  $search = '';
 
     public function with(): array
     {
+        // dd(User::paginate(5));
         return [
-            'users' => $this->users,
+            'users' => User::latest()->when($this->search, fn($q) => $q->where('name', 'like', '%' . $this->search . '%'))->paginate(10),
         ];
     }
 };

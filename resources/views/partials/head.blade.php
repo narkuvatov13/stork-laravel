@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.bunny.net">
 <link href="https://fonts.bunny.net/css?family=instrument-sans:400,500,600" rel="stylesheet" />
 
+
 {{-- Flowbite --}}
 <link href="https://cdn.jsdelivr.net/npm/flowbite@4.0.1/dist/flowbite.min.css" rel="stylesheet" />
 
@@ -21,6 +22,7 @@
 </style>
 <!-- Include the Alpine library on your page -->
 <script src="https://unpkg.com/alpinejs" defer></script>
+
 
 {{-- Flowbite --}}
 <script src="../path/to/flowbite/dist/flowbite.min.js"></script>

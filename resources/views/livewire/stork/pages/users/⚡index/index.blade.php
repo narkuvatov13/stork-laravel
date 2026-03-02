@@ -23,7 +23,7 @@
             @can('create users')
                 <div class="">
                     <a href="{{ route('users.create') }}"
-                        class="inline-flex items-center px-4 py-2 gap-1 text-white font-bold text-sm tracking-wide bg-indigo-600 hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-400 border rounded-md">
+                        class="inline-flex items-center px-4 py-2 gap-1 text-white font-bold text-sm tracking-wide bg-lime-600 hover:bg-lime-500 transition focus:ring-2 focus:ring-indigo-400 border rounded-md">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                             stroke="currentColor" class="size-6">
                             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
@@ -70,31 +70,28 @@
                 </thead>
                 <tbody class="bg-white divide-y divide-slate-200">
                     @forelse ($users as $user)
-                        <tr wire:key="category-{{ $category->id }}" wire:transition class="hover:bg-slate-50">
+                        <tr wire:key="category-{{ $user->id }}" wire:transition class="hover:bg-slate-50">
                             <td class='px-6 py-4 whitespace-nowrap'>
                                 <div class="text-sm font-medium text-zinc-900">
-                                    {{ $category->name }}
+                                    {{ $user->name }}
                                 </div>
                             </td>
                             <td class='px-6 py-4 whitespace-nowrap'>
-                                <div class="flex items-center">
-                                    <div class="flex-shrink-0 h-10 w-10 ">
-                                        <img class="h-10 w-10 rounded-full"
-                                            src="{{ asset('storage/' . $category->image) }}" alt="Preview Image">
-                                    </div>
+                                <div class="text-sm font-medium text-zinc-900">
+                                    {{ $user->email }}
                                 </div>
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap">
                                 <span
-                                    class="px-2 py-0.5 inline-flex text-sm leading-5 font-semibold rounded-full {{ $category->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                                    {{ $category->is_active ? 'Active' : 'In Active' }}
+                                    class="px-2 py-0.5 inline-flex text-sm leading-5 font-semibold rounded-full {{ $user->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
+                                    {{ $user->is_active ? 'Active' : 'In Active' }}
                                 </span>
                             </td class='px-6 py-4'>
 
                             <td colspan="1" class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
                                 <div class="flex justify-start gap-2">
                                     {{-- Edit --}}
-                                    <a href="{{ route('categories.edit', $category) }}"
+                                    <a href="{{ route('users.edit', $user) }}"
                                         class="text-indigo-600 hover:text-indigo-900">
                                         Edit
                                     </a>
@@ -126,7 +123,7 @@
                                                     x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                                                     class="relative px-7 py-6 w-full bg-white sm:max-w-lg sm:rounded-lg">
                                                     <div class="flex justify-between items-center pb-2">
-                                                        <h3 class="text-lg font-semibold text-zinc-900">Category</h3>
+                                                        <h3 class="text-lg font-semibold text-zinc-900">User</h3>
                                                         <button @click="modalOpen=false"
                                                             class="flex absolute top-0 right-0 justify-center items-center mt-5 mr-5 w-8 h-8 text-gray-600 rounded-full hover:text-gray-800 hover:bg-gray-50">
                                                             <svg class="w-5 h-5" xmlns="http://www.w3.org/2000/svg"
@@ -139,7 +136,7 @@
                                                     </div>
                                                     <div class="relative w-auto">
                                                         <p class="text-zinc-700">
-                                                            Do you want to delete your {{ $category->name }} ?
+                                                            Do you want to delete your {{ $user->name }} ?
                                                         </p>
                                                     </div>
                                                     <div
@@ -147,7 +144,7 @@
                                                         <button @click="modalOpen=false" type="button"
                                                             class="inline-flex justify-center items-center text-zinc-900 px-4 py-2 h-10 text-sm font-medium rounded-md border transition-colors  hover:bg-zinc-200 focus:outline-none focus:ring-2 focus:ring-zinc-400 focus:ring-offset-2">Cancel</button>
                                                         <button type="button"
-                                                            @click="$dispatch('delete',{category: {{ $category->id }}})"
+                                                            @click="$dispatch('delete',{category: {{ $user->id }}})"
                                                             class="inline-flex justify-center items-center px-4 py-2 h-10 text-sm font-medium text-red-800 rounded-md border border-transparent transition-colors focus:outline-none focus:ring-2 focus:ring-red-100 focus:ring-offset-2 bg-red-100 hover:bg-red-200">
                                                             Delete
                                                         </button>
@@ -161,7 +158,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="px-6 text-center text-slate-400"> No Category Found.</td>
+                            <td colspan="5" class="px-6 py-6 text-center text-slate-400"> No Category Found.</td>
                         </tr>
                     @endforelse
 

@@ -11,17 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('districts', function (Blueprint $table) {
+        Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('city_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
-            $table->boolean('is_active')->default(true);
+            $table->foreignId('order_id')->constrained()->cascadeOnDelete();
+            $table->enum('method', ['card', 'cash']);
+            $table->enum('status', ['pending', 'paid', 'failed']);
             $table->timestamps();
-
-            $table->unique([
-                'city_id',
-                'slug'
-            ]);
         });
     }
 
@@ -30,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('districts');
+        Schema::dropIfExists('payments');
     }
 };

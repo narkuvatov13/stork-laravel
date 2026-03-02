@@ -11,17 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('districts', function (Blueprint $table) {
+        Schema::create('otps', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('city_id')->constrained()->cascadeOnDelete();
-            $table->string('name');
-            $table->boolean('is_active')->default(true);
+            $table->foreignUuid('user_id')->constrained()->cascadeOnDelete();
+            $table->string('code', 6);
+            $table->timestamp('expires_at');
+            $table->boolean('is_used')->default(false);
             $table->timestamps();
-
-            $table->unique([
-                'city_id',
-                'slug'
-            ]);
         });
     }
 
@@ -30,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('districts');
+        Schema::dropIfExists('otps');
     }
 };
