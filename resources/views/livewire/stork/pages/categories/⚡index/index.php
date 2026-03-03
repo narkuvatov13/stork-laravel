@@ -6,9 +6,21 @@ use Livewire\Attributes\On;
 use Livewire\Component;
 use Livewire\WithPagination;
 
+use function Livewire\Volt\title;
+
 new class extends Component {
     use WithPagination;
 
+    public function save()
+    {
+
+        $this->dispatch(
+            'toast-show',
+            type: 'success',
+            position: 'top-right',
+            message: 'Kayıt Basariyla Olusturuldu',
+        );
+    }
 
     // public function render()
     // {

@@ -1,9 +1,17 @@
 <div>
+    {{-- Breadcrumbs --}}
+    <flux:breadcrumbs>
+        <flux:breadcrumbs.item>Categories</flux:breadcrumbs.item>
+        <flux:breadcrumbs.item>List</flux:breadcrumbs.item>
+    </flux:breadcrumbs>
+
     {{-- Categories Heading --}}
-    <div class="mb-6">
-        <h1 class="text-2xl font-bold dark:text-slate-100 text-zinc-900"> Categories</h1>
-        <p class="mt-1 text-sm dark:text-slate-400 text-zinc-600">Manage your categories</p>
+    <div class="mt-4">
+        <flux:heading size="xl">Categories</flux:heading>
+        {{-- <flux:text>Manage your categories</flux:text> --}}
     </div>
+
+    <button wire:click ="save">Save</button>
 
     {{-- Filters --}}
     <div class="mb-6 bg-white  rounded-lg border border-zinc-200 p-4">
