@@ -1,26 +1,47 @@
 <div>
     {{-- Breadcrumbs --}}
     <flux:breadcrumbs>
-        <flux:breadcrumbs.item>Categories</flux:breadcrumbs.item>
+        <flux:breadcrumbs.item href="{{ route('categories.index') }}">Categories</flux:breadcrumbs.item>
         <flux:breadcrumbs.item>List</flux:breadcrumbs.item>
     </flux:breadcrumbs>
 
-    {{-- Categories Heading --}}
-    <div class="mt-4">
+    {{-- Heading --}}
+    <div class="mt-4 flex flex-col max-w-max  sm:max-w-full sm:flex-row sm:items-center sm:justify-between gap-4">
         <flux:heading size="xl">Categories</flux:heading>
         {{-- <flux:text>Manage your categories</flux:text> --}}
+        <flux:button variant="primary" size="sm">New Category</flux:button>
     </div>
 
-    <button wire:click ="save">Save</button>
 
-    {{-- Filters --}}
-    <div class="mb-6 bg-white  rounded-lg border border-zinc-200 p-4">
+    {{-- Body --}}
+
+
+    <div class="my-6  bg-white  rounded-lg border border-zinc-200 p-2">
+
+        {{-- Search --}}
+        <div class="flex justify-end items-center gap-2">
+
+            <flux:input class="max-w-1/5" size="lg" placeholder="Search" icon="magnifying-glass" clearable>
+            </flux:input>
+            <div class="text-sm relative p-4">
+                <flux:icon.funnel as="button" variant="solid"
+                    class="text-zinc-500 hover:text-zinc-500/90 cursor-pointer static transition-colors" />
+                <div
+                    class="rounded-full py-0.5 px-1  text-zinc-800 text-[8px] absolute top-0 right-0 border border-zinc-200">
+                    <span>30</span>
+                </div>
+
+            </div>
+
+        </div>
+        {{-- Table --}}
+
+        {{-- Pagination --}}
+
+
         <div class="flex flex-col sm:flex-row gap-4 items-center">
             {{-- Search Input --}}
-            <div class="flex-1">
-                <input type="text" wire:model.live.debounce.300ms="search" placeholder="Search Categries ... "
-                    class="w-full rounded-md border-zinc-300 shadow-sm  text-zinc-500 focus:border-indigo-500 focus:ring-indigo-500">
-            </div>
+
             <div class="sm:w-48">
                 {{-- <label for="" class='text-zinc-900 '>Status</label>
                 <input type="radio"> --}}
@@ -41,12 +62,6 @@
         </div>
     </div>
 
-    {{-- Success Message --}}
-    @if (session('success'))
-        <div class="mb-6 bg-green-100 border border-green-200 rounded-lg p-4" wire:transition>
-            <p class='text-sm text-green-800'>{{ session('success') }}</p>
-        </div>
-    @endif
 
     {{-- Categories Table --}}
 
