@@ -47,6 +47,18 @@
                 </p>
             </div>
 
+            <flux:button.group>
+                <flux:button>Per Page</flux:button>
+
+
+                <flux:select wire:model.live="paginationItimeCount">
+                    <flux:select.option>1 {{ $this->paginationItimeCount }}</flux:select.option>
+                    <flux:select.option>2</flux:select.option>
+                    <flux:select.option>3</flux:select.option>
+                    <flux:select.option>4</flux:select.option>
+                </flux:select>
+            </flux:button.group>
+
             <div>
                 <span class="inline-flex rtl:flex-row-reverse shadow-sm rounded-md">
 

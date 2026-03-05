@@ -52,6 +52,8 @@ new class extends Component {
     //Variables
 
     public string $search = '';
+    public $paginationItimeCount = 1;
+
 
     public function with(): array
     {
@@ -63,7 +65,7 @@ new class extends Component {
                     fn($q) =>
                     $q->where('name', 'like', '%' . $this->search . '%')
                 )
-                ->paginate(5),
+                ->paginate($this->paginationItimeCount),
         ];
     }
 
