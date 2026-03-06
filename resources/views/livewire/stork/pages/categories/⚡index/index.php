@@ -52,7 +52,7 @@ new class extends Component {
     //Variables
 
     public string $search = '';
-    public $paginationItimeCount = 1;
+    public int $paginationItimeCount = 5;
 
 
     public function with(): array

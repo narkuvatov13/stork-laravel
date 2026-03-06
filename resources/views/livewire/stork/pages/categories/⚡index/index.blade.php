@@ -131,9 +131,9 @@
         <flux:separator></flux:separator>
         {{-- Pagination --}}
 
-        <div class=" px-5 py-3 ">
+        {{-- <div class=" "> --}}
             {{ $categories->links('vendor.pagination.tailwind') }}
-        </div>
+        {{-- </div> --}}
 
 
     </div>
