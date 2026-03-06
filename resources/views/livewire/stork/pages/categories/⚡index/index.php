@@ -18,7 +18,7 @@ new class extends Component {
             'toast-show',
             type: 'success',
             position: 'top-right',
-            message: 'Kayıt Basariyla Olusturuldu',
+            message: 'Kayit Basariyla Olusturuldu',
         );
     }
 
@@ -52,7 +52,7 @@ new class extends Component {
     //Variables
 
     public string $search = '';
-    public int $paginationItimeCount = 5;
+    public int $paginationItemCount = 5;
 
 
     public function with(): array
@@ -65,7 +65,7 @@ new class extends Component {
                     fn($q) =>
                     $q->where('name', 'like', '%' . $this->search . '%')
                 )
-                ->paginate($this->paginationItimeCount),
+                ->paginate($this->paginationItemCount),
         ];
     }
 
@@ -77,6 +77,8 @@ new class extends Component {
     #[On('delete')]
     public function deleteCategory(Category $category): void
     {
+
+        dd($category);
         // authorize
         $category->delete();
         session()->flash('success', 'Category deleted successfully');

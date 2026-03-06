@@ -1,5 +1,5 @@
     @if ($paginator->hasPages())
-        <nav class="px-5 py-3" role="navigation" aria-label="{{ __('Pagination Navigation') }}">
+        <nav class="px-5 py-3 border-t-2 border-red-500" role="navigation" aria-label="{{ __('Pagination Navigation') }}">
 
             <div class="flex gap-2 items-center justify-between sm:hidden">
 
@@ -47,41 +47,18 @@
                     </p>
                 </div>
                 {{-- Per Page --}}
-                <flux:button.group>
-                    <flux:button>Per Page</flux:button>
-                    <flux:select wire:model.live="paginationItimeCount"
-                        class="cursor-pointer active:border-transparent">
-                        <flux:select.option>5</flux:select.option>
-                        <flux:select.option>10</flux:select.option>
-                        <flux:select.option>25</flux:select.option>
-                        <flux:select.option>50</flux:select.option>
-                    </flux:select>
-                </flux:button.group>
-
                 <div
                     class="perPage flex items-center border border-zinc-200 rounded-md  bg-white dark:bg-white/5 dark:border-white/10">
                     <div class="text-center px-4 py-2 border-r border-zinc-200 dark:border-white/10">
                         <span class="text-zinc-500 dark:text-zinc-500 ">Per Page</span>
                     </div>
-                    <select wire:model.live="paginationItimeCount"
+                    <select wire:model.live="paginationItemCount"
                         class="appearance-none cursor-pointer border border-transparent rounded-r-md bg-white text-zinc-800 dark:text-white dark:bg-zinc-800   focus:ring-transparent focus:border-transparent">
-                        <option>
-                            5
-                        </option>
-                        <option>
-                            10</option>
-                        <option>
-                            25</option>
-                        <option>
-                            50</option>
+                        <option>5</option>
+                        <option>10</option>
+                        <option>25</option>
+                        <option>50</option>
                     </select>
-
-
-                    {{-- bg-white hover:bg-zinc-50 text-zinc-800 dark:bg-white/5 dark:text-white dark:hover:bg-white/10 --}}
-
-
-
-
                 </div>
 
 
