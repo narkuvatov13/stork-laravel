@@ -1,16 +1,34 @@
 <div>
-    {{-- Categories Heading --}}
-    <div class="mb-6">
-        <h1 class="text-2xl font-bold dark:text-slate-100 text-zinc-900"> Category Create</h1>
-        {{-- <p class="mt-1 text-sm dark:text-slate-400 text-zinc-600">Manage your categories</p> --}}
+    {{-- Breadcrumbs --}}
+    <flux:breadcrumbs>
+        <flux:breadcrumbs.item href="{{ route('categories.index') }}">Categories</flux:breadcrumbs.item>
+        <flux:breadcrumbs.item>Create</flux:breadcrumbs.item>
+    </flux:breadcrumbs>
+
+
+    {{-- Heading --}}
+    <div class="mt-4 flex flex-col max-w-max  sm:max-w-full sm:flex-row sm:items-center sm:justify-between gap-4">
+        <flux:heading size="xl">Create Category</flux:heading>
     </div>
 
-    {{-- Category Form --}}
+    {{-- Body --}}
 
-    <div class="bg-white  rounded-lg border border-slate-200 p-6">
+    <div class="my-6 p-6 bg-white dark:bg-white/5  rounded-lg border border-zinc-200 dark:border-transparent ">
         <form wire:submit.prevent="save" class='space-y-6'>
-            {{-- Name --}}
             <div class="">
+                {{-- Name --}}
+                <flux:field>
+                    <flux:label>Name <span class="text-danger">*</span></flux:label>
+                    <flux:input wire:model.live="name" type="text" class:input="ring-emerald-600"
+                        dark:invalid="ring-emerald-600 invalid border border-amber:500" />
+                    <flux:error name="name" />
+                </flux:field>
+
+
+            </div>
+
+
+            {{-- <div class="">
                 <label for="name" class= 'block text-sm font-medium text-zinc-700'> Name </label>
                 <input type="text" id='name' wire:model.live.debounce='name' placeholder='Enter Category Name'
                     autofocus
@@ -18,7 +36,7 @@
                 @error('name')
                     <p class='mt-1 text-sm text-red-600'>{{ $message }}</p>
                 @enderror
-            </div>
+            </div> --}}
 
             {{-- Image --}}
             <div class="">

@@ -11,17 +11,6 @@ use function Livewire\Volt\title;
 new class extends Component {
     use WithPagination;
 
-    public function save()
-    {
-
-        $this->dispatch(
-            'toast-show',
-            type: 'success',
-            position: 'top-right',
-            message: 'Kayit Basariyla Olusturuldu',
-        );
-    }
-
     public $sortBy = 'date';
     public $sortDirection = 'desc';
 
@@ -74,13 +63,16 @@ new class extends Component {
         $this->resetPage();
     }
 
-    #[On('delete')]
+    #[On('deleteCategory')]
     public function deleteCategory(Category $category): void
     {
-
-        dd($category);
-        // authorize
         $category->delete();
-        session()->flash('success', 'Category deleted successfully');
+
+        $this->dispatch(
+            'toast-show',
+            type: 'success',
+            position: 'top-right',
+            message: $category->name . ' deleted successfully.',
+        );
     }
 };

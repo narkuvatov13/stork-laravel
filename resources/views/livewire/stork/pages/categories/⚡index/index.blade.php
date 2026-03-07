@@ -43,9 +43,10 @@
         <div class="flex flex-col ">
             <div class="overflow-x-auto">
                 <div class="inline-block min-w-full">
-                    <div class="overflow-hidden">
-                        <table class="min-w-full divide-y divide-zinc-200">
-                            <thead class="bg-zinc-50 dark:bg-zinc-900">
+                    <div class="overflow-hidden my-0 ">
+                        <table class="min-w-full divide-y divide-zinc-200 dark:divide-white/5 transition-all">
+                            {{-- Table Heead --}}
+                            <thead class="bg-zinc-50 dark:bg-white/5 dark:border-transparent ">
                                 <th
                                     class="px-5 py-3 text-zinc-800 dark:text-white text-xs font-bold uppercase text-left">
                                     <div class="flex items-center gap-1">
@@ -76,10 +77,11 @@
                                 </th>
 
                             </thead>
-                            <tbody class="divide-y divide-zinc-200 dark:divide-white/10">
+                            {{-- Table --}}
+                            <tbody class="divide-y divide-zinc-200 dark:divide-white/5">
                                 @forelse ($categories as $category)
                                     <tr wire:key="category-{{ $category->id }}" wire:transition
-                                        class="text-zinc-800 dark:text-white bg-white hover:bg-zinc-50 dark:bg-white/5 dark:hover:bg-white/10 cursor-pointer border-green-500">
+                                        class="text-zinc-800 dark:text-white bg-white hover:bg-zinc-50 cursor-pointer dark:bg-transparent dark:hover:bg-white/10 ">
 
                                         <td class="px-5 py-4 text-sm font-medium whitespace-nowrap">
                                             {{ $category->name }}</td>
@@ -108,40 +110,33 @@
                                                     <flux:icon.trash variant="micro"
                                                         class="text-red-600 dark:text-red-400 " />
 
-
-
-                                                    <flux:link wire:click="deleteCategory({{ $category->id }})"
-                                                        wire:confirm="Are you sure you want to delete this category?"
-                                                        as="button" variant="ghost"
-                                                        class="text-red-600 dark:text-red-400">
-                                                        Delete
-                                                    </flux:link>
-
-
-
-                                                    <div x-data="{ modalOpen: false }"
-                                                        @keydown.escape.window="modalOpen = false"
-                                                        :class="{ 'z-40': modalOpen }" class="relative w-auto h-auto">
-                                                        <button @click="modalOpen=true"
-                                                            class="inline-flex justify-center items-center px-4 py-2 h-10 text-sm font-medium bg-white rounded-md border transition-colors hover:bg-neutral-100 active:bg-white focus:bg-white focus:outline-none focus:ring-2 focus:ring-neutral-200/60 focus:ring-offset-2 disabled:opacity-50 disabled:pointer-events-none">Open</button>
+                                                    <div x-data="{ deleteModalOpen: false }"
+                                                        @keydown.escape.window="deleteModalOpen = false"
+                                                        :class="{ 'z-40': deleteModalOpen }"
+                                                        class="relative w-auto h-auto">
+                                                        <flux:link @click="deleteModalOpen=true" as="button"
+                                                            variant="ghost"
+                                                            class="text-red-600 dark:text-red-400 cursor-pointer">
+                                                            Delete
+                                                        </flux:link>
                                                         <template x-teleport="body">
-                                                            <div x-show="modalOpen"
+                                                            <div x-show="deleteModalOpen"
                                                                 class="fixed top-0 left-0 z-[99] flex items-center justify-center w-screen h-screen"
                                                                 x-cloak>
                                                                 {{-- Modal Backdrop --}}
-                                                                <div x-show="modalOpen"
+                                                                <div x-show="deleteModalOpen"
                                                                     x-transition:enter="ease-out duration-300"
                                                                     x-transition:enter-start="opacity-0"
                                                                     x-transition:enter-end="opacity-100"
                                                                     x-transition:leave="ease-in duration-300"
                                                                     x-transition:leave-start="opacity-100"
                                                                     x-transition:leave-end="opacity-0"
-                                                                    @click="modalOpen=false"
+                                                                    @click="deleteModalOpen=false"
                                                                     class="absolute inset-0 w-full h-full  bg-zinc-900/70 ">
                                                                 </div>
                                                                 {{-- Modal Card --}}
-                                                                <div x-show="modalOpen"
-                                                                    x-trap.inert.noscroll="modalOpen"
+                                                                <div x-show="deleteModalOpen"
+                                                                    x-trap.inert.noscroll="deleteModalOpen"
                                                                     x-transition:enter="ease-out duration-300"
                                                                     x-transition:enter-start="opacity-0 scale-90"
                                                                     x-transition:enter-end="opacity-100 scale-100"
@@ -154,7 +149,7 @@
                                                                         <h3 class="text-lg text-center font-semibold">
 
                                                                         </h3>
-                                                                        <button @click="modalOpen=false"
+                                                                        <button @click="deleteModalOpen=false"
                                                                             class="flex absolute top-0 right-0 justify-center items-center mt-5 mr-5 w-8 h-8 text-zinc-500 rounded-full hover:text-zinc-800 hover:bg-zinc-50 dark:bg-transparent dark:hover:bg-transparent dark:text-zinc-600 dark:hover:text-zinc-500">
                                                                             <svg class="w-5 h-5"
                                                                                 xmlns="http://www.w3.org/2000/svg"
@@ -192,12 +187,13 @@
                                                                             like to do this? </p>
                                                                         <div
                                                                             class="flex flex-row justify-around sm:space-x-2 mt-6">
-                                                                            <button @click="modalOpen=false"
+                                                                            <button @click="deleteModalOpen=false"
                                                                                 type="button"
                                                                                 class="inline-flex justify-center items-center px-4 py-2 h-10 text-sm font-medium text-zinc-800  rounded-md border border-zinc-200 transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-zinc-200 focus:ring-offset-2 bg-white hover:bg-zinc-50 dark:text-white dark:bg-zinc-800 dark:hover:bg-zinc-700  dark:border-transparent">
                                                                                 Cancel
                                                                             </button>
-                                                                            <button @click="modalOpen=false"
+                                                                            <button
+                                                                                @click="$dispatch('deleteCategory', {category: {{ $category->id }}})"
                                                                                 type="button"
                                                                                 class="inline-flex justify-center items-center px-4 py-2 h-10 text-sm font-medium text-white rounded-md border border-transparent transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:ring-offset-2 bg-red-600 hover:bg-red-500 ">
                                                                                 Delete
@@ -231,7 +227,9 @@
         </div>
 
         {{-- Divider --}}
-        <flux:separator></flux:separator>
+        {{-- @if ($category->count() >= 5)
+            <flux:separator></flux:separator>
+        @endif --}}
         {{-- Pagination --}}
         {{ $categories->links('vendor.pagination.tailwind') }}
 
